@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-time Weather Forecast</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="background-globes">
+    <div class="globe globe-1"></div>
+    <div class="globe globe-2"></div>
+  </div>
+
+  <div class="weather-card">
+    <header class="app-header">
+      <h1><i class="fa-solid fa-cloud-sun-rain"></i> Weather Forecast</h1>
+      <p class="subtitle">รายงานสภาพอากาศแบบเรียลไทม์ด้วย Fetch API</p>
+    </header>
+
+    <!-- ช่องค้นหา และปุ่ม GPS -->
+    <section class="search-box">
+      <div class="input-group">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="cityInput" placeholder="พิมพ์ชื่อเมือง (เช่น Bangkok, Tokyo)..." autocomplete="off">
+        <button id="searchBtn"><i class="fa-solid fa-paper-plane"></i> ค้นหา</button>
+      </div>
+      <button id="geoBtn" class="geo-btn" title="ดึงตำแหน่งปัจจุบันของคุณ">
+        <i class="fa-solid fa-location-crosshairs"></i> ตำแหน่งฉัน
+      </button>
+    </section>
+
+    <!-- ตัวเลือกหน่วยอุณหภูมิ -->
+    <div class="unit-toggle">
+      <span class="active" id="unitC">°C</span>
+      <label class="switch">
+        <input type="checkbox" id="unitCheckbox">
+        <span class="slider"></span>
+      </label>
+      <span id="unitF">°F</span>
+    </div>
+
+    <!-- ส่วนแสดงข้อความกำลังโหลด / Error -->
+    <div id="loading" class="status-msg hidden">
+      <i class="fa-solid fa-spinner fa-spin"></i> กำลังดึงข้อมูลสภาพอากาศ...
+    </div>
+    <div id="error" class="status-msg error-msg hidden"></div>
+
+    <!-- ส่วนแสดงผลสภาพอากาศ -->
+    <main id="weatherDisplay" class="weather-content hidden">
+      <div class="location-info">
+        <h2 id="cityName">--</h2>
+        <p id="coordinates" class="coords"><i class="fa-solid fa-map-pin"></i> Lat: -- | Lon: --</p>
+        <span id="dateText" class="date-badge">--</span>
+      </div>
+
+      <div class="main-weather">
+        <div class="weather-icon-wrapper">
+          <i id="weatherIcon" class="fa-solid fa-sun weather-icon"></i>
+        </div>
+        <div class="temperature-container">
+          <span id="tempValue" class="temp-number">--</span>
+          <span id="tempUnit" class="temp-degree">°C</span>
+        </div>
+        <p id="weatherDesc" class="weather-desc">--</p>
+      </div>
+
+      <!-- สถิติต่างๆ -->
+      <div class="weather-metrics">
+        <div class="metric-card">
+          <i class="fa-solid fa-temperature-three-quarters"></i>
+          <div>
+            <span class="label">ความรู้สึกจริง</span>
+            <span id="feelsLike" class="value">--°C</span>
+          </div>
+        </div>
+        <div class="metric-card">
+          <i class="fa-solid fa-droplet"></i>
+          <div>
+            <span class="label">ความชื้น</span>
+            <span id="humidity" class="value">--%</span>
+          </div>
+        </div>
+        <div class="metric-card">
+          <i class="fa-solid fa-wind"></i>
+          <div>
+            <span class="label">ความเร็วลม</span>
+            <span id="windSpeed" class="value">-- km/h</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>Data powered by Open-Meteo API</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
